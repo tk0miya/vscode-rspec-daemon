@@ -1,6 +1,10 @@
 {
   "name": "rspec-daemon",
   "displayName": "rspec-daemon",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tk0miya/vscode-rspec-daemon"
+  },
   "description": "VSCode extension to run rspec testing quickly with rspec-daemon",
   "version": "1.0.0",
   "engines": {
