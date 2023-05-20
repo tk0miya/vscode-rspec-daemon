@@ -14,8 +14,12 @@
   "contributes": {
     "commands": [
       {
-        "command": "rspec-daemon.helloWorld",
-        "title": "Hello World"
+        "command": "rspec-daemon.invokeRSpecDaemon",
+        "title": "RSpec Daemon: Invoke rspec-daemon"
+      },
+      {
+        "command": "rspec-daemon.startRSpecForCurrentFile",
+        "title": "RSpec Daemon: Run rspec for current file"
       }
     ]
   },
