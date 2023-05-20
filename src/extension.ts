@@ -34,9 +34,6 @@ function runSpec(filePath: string) {
 		client.write(filePath);
 		client.end();
 	})
-	client.on('data', (msg) => {
-		client.destroy();
-	})
 	client.on('error', () => {
 		vscode.window.showErrorMessage(`Failed to run spec: ${filePath}`);
 	})
