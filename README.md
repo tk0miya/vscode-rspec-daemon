@@ -4,15 +4,26 @@ VSCode extension to run rspec testing quickly with [rspec-daemon](https://github
 
 ## Features
 
-* Invoking rspec-daemon
-* Run the current spec file
-* Run a spec for the current .rb file
+vscode-rspec-daemon provides two commands.  Please choice the command you'd like to execute from your command palette.
+
+* "RSpec Daemon: Invoke rspec-daemon" (`rspec-daemon.invokeRSpecDaemon`)
+    * Invoke rspec-daemon server
+* "RSpec Daemon: Run rspec for current file" (`rspec-daemon.startRSpecForCurrentFile`)
+    * Run a new rspec task in the rspec-daemon server for the current file
 
 ## Requirements
 
-* [rspec-daemon](https://github.com/asonas/rspec-daemon)
+* Install [rspec-daemon](https://github.com/asonas/rspec-daemon) via bundler
 
 ## Release Notes
+
+### 1.0.2
+
+Do not close connection from client side
+
+### 1.0.1
+
+Fix guessing paths of request specs
 
 ### 1.0.0
 
