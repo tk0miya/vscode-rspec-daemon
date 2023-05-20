@@ -7,7 +7,7 @@
   },
   "publisher": "tk0miya",
   "description": "VSCode extension to run rspec testing quickly with rspec-daemon",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "engines": {
     "vscode": "^1.78.0"
   },
