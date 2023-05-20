@@ -1,8 +1,8 @@
 {
   "name": "rspec-daemon",
   "displayName": "rspec-daemon",
-  "description": "",
-  "version": "0.0.1",
+  "description": "VSCode extension to run rspec testing quickly with rspec-daemon",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.78.0"
   },
