@@ -43,14 +43,12 @@ function runSpec(filePath: string) {
 }
 
 function guessSpecFilePath(rootPath: string | undefined, filePath: string): string | undefined {
-	const newPath = filePath.replace('.rb', '_spec.rb')
-
 	if (rootPath === undefined) {
 		return undefined;
 	}
 
-	if (newPath.startsWith('app/controllers/')) {
-		const path = newPath.replace('app/controllers/', 'spec/requests/');
+	if (filePath.startsWith('app/controllers/')) {
+		const path = filePath.replace('app/controllers/', 'spec/requests/').replace('_controller.rb', '_spec.rb');
 		const absolutePath = posix.join(rootPath, path);
 		if (fs.existsSync(absolutePath)) {
 			return path;
@@ -59,8 +57,8 @@ function guessSpecFilePath(rootPath: string | undefined, filePath: string): stri
 		}
 	}
 
-	if (newPath.startsWith('app/')) {
-		const path = newPath.replace('app/', 'spec/');
+	if (filePath.startsWith('app/')) {
+		const path = filePath.replace('app/', 'spec/').replace('.rb', '_spec.rb');
 		const absolutePath = posix.join(rootPath, path);
 		if (fs.existsSync(absolutePath)) {
 			return path;
