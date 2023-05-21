@@ -10,9 +10,9 @@ RSpec.describe 'rspec-daemon example' do
 
     context 'When Integer given' do
       let(:x) { 1 }
-      let(:y) { 2 }
+      let(:y) { 3 }
 
-      it { is_expected.to eq 3 }
+      it { is_expected.to eq 4 }
     end
 
     context 'When String given' do

@@ -90,6 +90,8 @@ function invokeRSpecDaemon() {
 }
 
 function stopRSpecDaemon() {
+	stopWatchers();
+
 	if (rspecDaemonTask) {
 		rspecDaemonTask.terminate();
 		rspecDaemonTask = undefined;
