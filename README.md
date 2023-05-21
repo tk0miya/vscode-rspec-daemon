@@ -18,6 +18,12 @@ vscode-rspec-daemon provides several commands.  Please choice the command you'd 
 
 ## Release Notes
 
+### 1.1.0
+
+* Support file watching feature
+* Support stopping rspec-daemon feature
+* Terminal will be automatically closed on rspec-daemon terminated
+
 ### 1.0.2
 
 Do not close connection from client side
