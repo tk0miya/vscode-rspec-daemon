@@ -2,16 +2,27 @@ import * as vscode from 'vscode';
 import * as net from 'net';
 import * as fs from 'fs';
 import { posix } from 'path';
+import { start } from 'repl';
+
+const fileWatchers = new Map<string, vscode.FileSystemWatcher>();
 
 export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.invokeRSpecDaemon', invokeRSpecDaemon));
 	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.startRSpecForCurrentFile', startRSpecForCurrentFile));
+	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.stopWatchers', stopWatchers));
+	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.watchCurrentFile', watchCurrentFile));
 }
 
-export function deactivate() { }
+export function deactivate() {
+	stopWatchers();
+}
 
 function startRSpecForCurrentFile() {
 	const filePath = vscode.window.activeTextEditor?.document.uri.fsPath;
+	startRSpec(filePath);
+}
+
+function startRSpec(filePath: string | undefined) {
 	const relativePath = filePath ? vscode.workspace.asRelativePath(filePath) : '';
 	if (!filePath) {
 		vscode.window.showErrorMessage('Please open .spec file to run spec');
@@ -72,4 +83,33 @@ function invokeRSpecDaemon() {
 	const task = new vscode.Task({ type: '' }, vscode.TaskScope.Workspace, "rspec-daemon", "rspec-daemon", execution);
 
 	vscode.tasks.executeTask(task);
+}
+
+function watchCurrentFile() {
+	const filePath = vscode.window.activeTextEditor?.document.uri.fsPath;
+	if (filePath) {
+		const relativePath = vscode.workspace.asRelativePath(filePath);
+		if (fileWatchers.has(filePath)) {
+			vscode.window.showInformationMessage(`${relativePath} has already been watched`);
+		} else {
+			const watcher = vscode.workspace.createFileSystemWatcher(filePath);
+			watcher.onDidChange((uri) => {
+				startRSpec(uri.path)
+			})
+			fileWatchers.set(filePath, watcher);
+
+			vscode.window.showInformationMessage(`Start watching ${relativePath}`);
+		}
+	} else {
+		vscode.window.showErrorMessage('No file opened');
+	}
+}
+
+function stopWatchers() {
+	for (const watcher of fileWatchers.values()) {
+		watcher.dispose();
+	}
+	fileWatchers.clear();
+
+	vscode.window.showInformationMessage('Stop all watchers');
 }

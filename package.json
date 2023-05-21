@@ -25,6 +25,14 @@
       {
         "command": "rspec-daemon.startRSpecForCurrentFile",
         "title": "RSpec Daemon: Run rspec for current file"
+      },
+      {
+        "command": "rspec-daemon.stopWatchers",
+        "title": "RSpec Daemon: Stop watching file changes"
+      },
+      {
+        "command": "rspec-daemon.watchCurrentFile",
+        "title": "RSpec Daemon: Watch the current file"
       }
     ]
   },
