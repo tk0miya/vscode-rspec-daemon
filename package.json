@@ -31,6 +31,10 @@
         "title": "RSpec Daemon: Stop watching file changes"
       },
       {
+        "command": "rspec-daemon.stopRSpecDaemon",
+        "title": "RSpec Daemon: Stop rspec-daemon"
+      },
+      {
         "command": "rspec-daemon.watchCurrentFile",
         "title": "RSpec Daemon: Watch the current file"
       }

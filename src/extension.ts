@@ -5,10 +5,12 @@ import { posix } from 'path';
 import { start } from 'repl';
 
 const fileWatchers = new Map<string, vscode.FileSystemWatcher>();
+let rspecDaemonTask: vscode.TaskExecution | undefined;
 
 export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.invokeRSpecDaemon', invokeRSpecDaemon));
 	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.startRSpecForCurrentFile', startRSpecForCurrentFile));
+	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.stopRSpecDaemon', stopRSpecDaemon));
 	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.stopWatchers', stopWatchers));
 	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.watchCurrentFile', watchCurrentFile));
 }
@@ -82,7 +84,16 @@ function invokeRSpecDaemon() {
 	const execution = new vscode.ShellExecution("bundle exec rspec-daemon");
 	const task = new vscode.Task({ type: '' }, vscode.TaskScope.Workspace, "rspec-daemon", "rspec-daemon", execution);
 
-	vscode.tasks.executeTask(task);
+	vscode.tasks.executeTask(task).then((process) => {
+		rspecDaemonTask = process;
+	});
+}
+
+function stopRSpecDaemon() {
+	if (rspecDaemonTask) {
+		rspecDaemonTask.terminate();
+		rspecDaemonTask = undefined;
+	}
 }
 
 function watchCurrentFile() {
