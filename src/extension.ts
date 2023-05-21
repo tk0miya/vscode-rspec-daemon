@@ -68,7 +68,8 @@ function guessSpecFilePath(rootPath: string | undefined, filePath: string): stri
 }
 
 function invokeRSpecDaemon() {
-	const terminal = vscode.window.createTerminal("rspec-daemon");
-	terminal.show();
-	terminal.sendText('bundle exec rspec-daemon', true)
+	const execution = new vscode.ShellExecution("bundle exec rspec-daemon");
+	const task = new vscode.Task({ type: '' }, vscode.TaskScope.Workspace, "rspec-daemon", "rspec-daemon", execution);
+
+	vscode.tasks.executeTask(task);
 }
