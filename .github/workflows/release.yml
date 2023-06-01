@@ -12,6 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
+        with:
+          node-version: lts
       - name: Install the dependencies
         run: npm i
       - name: Install vsce
