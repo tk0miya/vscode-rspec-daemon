@@ -10,6 +10,7 @@ let rspecDaemonTask: vscode.TaskExecution | undefined;
 export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.invokeRSpecDaemon', invokeRSpecDaemon));
 	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.startRSpecForCurrentFile', startRSpecForCurrentFile));
+	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.startRSpecForCurrentFileAndLine', startRSpecForCurrentFileAndLine));
 	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.stopRSpecDaemon', stopRSpecDaemon));
 	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.stopWatchers', stopWatchers));
 	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.watchCurrentFile', watchCurrentFile));
@@ -22,6 +23,19 @@ export function deactivate() {
 function startRSpecForCurrentFile() {
 	const filePath = vscode.window.activeTextEditor?.document.uri.fsPath;
 	startRSpec(filePath);
+}
+
+function startRSpecForCurrentFileAndLine() {
+	const filePath = vscode.window.activeTextEditor?.document.uri.fsPath;
+	const relativePath = filePath ? vscode.workspace.asRelativePath(filePath) : '';
+	if (!filePath) {
+		vscode.window.showErrorMessage('Please open .spec file to run spec');
+	} else if (filePath.endsWith('_spec.rb')) {
+		const lineNumber = vscode.window.activeTextEditor?.selection.active.line;
+		runSpec(relativePath, lineNumber);
+	} else {
+		vscode.window.showErrorMessage(`${relativePath} is not a spec file`);
+	}
 }
 
 function startRSpec(filePath: string | undefined) {
@@ -42,9 +56,13 @@ function startRSpec(filePath: string | undefined) {
 	}
 }
 
-function runSpec(filePath: string) {
+function runSpec(filePath: string, lineNumber: number | undefined = undefined) {
 	const client = net.connect(3002, 'localhost', () => {
-		client.write(filePath);
+		if (lineNumber) {
+			client.write(`${filePath}:${lineNumber}`);
+		} else {
+			client.write(filePath);
+		}
 		client.end();
 	})
 	client.on('error', () => {

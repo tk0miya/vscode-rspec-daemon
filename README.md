@@ -10,13 +10,17 @@ vscode-rspec-daemon provides several commands.  Please choice the command you'd 
 
 * Start and stop rspec-daemon
 * Run a new rspec task in the rspec-daemon server for the current file
-* Watch the current file to run rspec on change
+* Watch the current file (and line) to run rspec on change
 
 ## Requirements
 
 * Install [rspec-daemon](https://github.com/asonas/rspec-daemon) via bundler
 
 ## Release Notes
+
+### 1.2.0
+
+* Support running test for the current line
 
 ### 1.1.0
 
