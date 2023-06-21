@@ -8,7 +8,7 @@ const fileWatchers = new Map<string, vscode.FileSystemWatcher>();
 let rspecDaemonTask: vscode.TaskExecution | undefined;
 
 export function activate(context: vscode.ExtensionContext) {
-	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.invokeRSpecDaemon', invokeRSpecDaemon));
+	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.startRSpecDaemon', startRSpecDaemon));
 	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.startRSpecForCurrentFile', startRSpecForCurrentFile));
 	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.startRSpecForCurrentFileAndLine', startRSpecForCurrentFileAndLine));
 	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.stopRSpecDaemon', stopRSpecDaemon));
@@ -98,7 +98,7 @@ function guessSpecFilePath(rootPath: string | undefined, filePath: string): stri
 	return undefined;
 }
 
-function invokeRSpecDaemon() {
+function startRSpecDaemon() {
 	const execution = new vscode.ShellExecution("bundle exec rspec-daemon");
 	const task = new vscode.Task({ type: '' }, vscode.TaskScope.Workspace, "rspec-daemon", "rspec-daemon", execution);
 
