@@ -94,6 +94,14 @@ function guessSpecFilePath(rootPath: string | undefined, filePath: string): stri
 		} else {
 			vscode.window.showInformationMessage(`Searching for ${path} ...`);
 		}
+	} else if (filePath.startsWith('lib/')) {
+		const path = filePath.replace('lib/', 'spec/').replace('.rb', '_spec.rb');
+		const absolutePath = posix.join(rootPath, path);
+		if (fs.existsSync(absolutePath)) {
+			return path;
+		} else {
+			vscode.window.showInformationMessage(`Searching for ${path} ...`);
+		}
 	}
 
 	return undefined;
