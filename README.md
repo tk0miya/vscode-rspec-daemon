@@ -8,7 +8,7 @@ VSCode extension to run rspec testing quickly with [rspec-daemon](https://github
 
 vscode-rspec-daemon provides several commands.  Please choice the command you'd like to execute from your command palette.
 
-* Start and stop rspec-daemon
+* Start, stop and restart rspec-daemon
 * Run a new rspec task in the rspec-daemon server for the current file
 * Watch the current file (and line) to run rspec on change
 

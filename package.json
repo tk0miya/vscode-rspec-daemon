@@ -19,6 +19,10 @@
   "contributes": {
     "commands": [
       {
+        "command": "rspec-daemon.restartRSpecDaemon",
+        "title": "RSpec Daemon: Restart rspec-daemon"
+      },
+      {
         "command": "rspec-daemon.startRSpecDaemon",
         "title": "RSpec Daemon: Start rspec-daemon"
       },

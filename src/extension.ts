@@ -8,6 +8,7 @@ const fileWatchers = new Map<string, vscode.FileSystemWatcher>();
 let rspecDaemonTask: vscode.TaskExecution | undefined;
 
 export function activate(context: vscode.ExtensionContext) {
+	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.restartRSpecDaemon', restartRSpecDaemon));
 	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.startRSpecDaemon', startRSpecDaemon));
 	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.startRSpecForCurrentFile', startRSpecForCurrentFile));
 	context.subscriptions.push(vscode.commands.registerCommand('rspec-daemon.startRSpecForCurrentFileAndLine', startRSpecForCurrentFileAndLine));
@@ -114,6 +115,11 @@ function stopRSpecDaemon() {
 		rspecDaemonTask.terminate();
 		rspecDaemonTask = undefined;
 	}
+}
+
+function restartRSpecDaemon() {
+	stopRSpecDaemon();
+	startRSpecDaemon();
 }
 
 function watchCurrentFile() {
