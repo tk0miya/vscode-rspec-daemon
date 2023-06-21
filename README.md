@@ -18,6 +18,12 @@ vscode-rspec-daemon provides several commands.  Please choice the command you'd 
 
 ## Release Notes
 
+### 1.3.0
+
+* #1: Rename command name from invokeRSpecDaemon to startRSpecDaemon
+* #2: feature: Support restarting rspec-daemon
+* #3: feature: Support specs for .rb files under lib/ directory
+
 ### 1.2.0
 
 * Support running test for the current line
