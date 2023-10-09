@@ -63,6 +63,6 @@
     "glob": "^10.3.10",
     "mocha": "^10.2.0",
     "typescript": "^5.2.2",
-    "@vscode/test-electron": "^2.3.4"
+    "@vscode/test-electron": "^2.3.5"
   }
 }
