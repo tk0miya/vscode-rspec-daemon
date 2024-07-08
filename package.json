@@ -60,7 +60,7 @@
     "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.7",
     "@types/node": "20.x",
-    "glob": "^10.4.2",
+    "glob": "^10.4.3",
     "mocha": "^10.6.0",
     "typescript": "^5.5.3",
     "@vscode/test-electron": "^2.4.0"
