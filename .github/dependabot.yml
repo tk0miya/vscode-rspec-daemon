@@ -11,9 +11,10 @@ updates:
     cooldown:
       default-days: 3
     ignore:
-      # Ignore non-LTS Node.js versions (odd numbers are not LTS)
+      # Hold Node.js releases until LTS promotion (October each year).
+      # Remove an entry when it enters LTS; add the next April release as it approaches.
       - dependency-name: "@types/node"
-        versions: ["25.x", "27.x", "29.x", "31.x", "33.x"]
+        versions: ["25.x", "26.x", "27.x", "28.x"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
