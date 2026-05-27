@@ -9,7 +9,7 @@ updates:
       interval: "weekly"
       timezone: "Asia/Tokyo"
     cooldown:
-      default-days: 3
+      default-days: 7
     ignore:
       # Hold Node.js releases until LTS promotion (October each year).
       # Remove an entry when it enters LTS; add the next April release as it approaches.
@@ -22,4 +22,4 @@ updates:
       interval: "weekly"
       timezone: "Asia/Tokyo"
     cooldown:
-      default-days: 3
+      default-days: 7
