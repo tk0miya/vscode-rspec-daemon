@@ -19,6 +19,11 @@ jobs:
       - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: lts/*
+          # Skip package manager cache to avoid the cache-poisoning attack at release time:
+          # a poisoned cache written from a PR could otherwise be reused here
+          # and end up shipped to the VS Code Marketplace.
+          # See https://docs.zizmor.sh/audits/#cache-poisoning
+          package-manager-cache: false
       - name: Install the dependencies
         run: npm i
       - name: Install vsce
