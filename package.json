@@ -62,7 +62,7 @@
     "@types/node": "24.x",
     "@vscode/vsce": "^4.0.0",
     "glob": "^13.0.6",
-    "mocha": "^12.0.2",
+    "mocha": "^12.0.3",
     "typescript": "^7.0.2",
     "@vscode/test-electron": "^3.1.0"
   }
